@@ -1,25 +1,28 @@
-package org.example.entities;
+package entities;
+
+import enums.CurrencyType;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ReportEntity {
-    String reportPath;
-    List<ReportRecordEntity> reportRecords;
+    private String reportPath;
+    private List<ReportRecordEntity> reportRecords;
 
     public ReportEntity(CurrencyType currencyType) {
         switch (currencyType) {
 
             case USD -> {
-                reportPath = "src\\main\\java\\org\\example\\entities\\reports\\usd.csv";
+                reportPath = "reports\\usd.csv";
             }
             case EUR -> {
-                reportPath = "src\\main\\java\\org\\example\\entities\\reports\\euro.csv";
+                reportPath = "reports\\euro.csv";
             }
             case TRY -> {
-                reportPath = "src\\main\\java\\org\\example\\entities\\reports\\lira.csv";
+                reportPath = "reports\\lira.csv";
             }
         }
 
@@ -27,11 +30,13 @@ public class ReportEntity {
         reportRecords = new ArrayList<>();
         File file = new File(reportPath);
         try (Scanner sc = new Scanner(file)) {
-            //Сканер читает файл как пустой. Я не знаю, почему так
             while (sc.hasNextLine()) {
                 try {
-                    String line = sc.nextLine();
-                    reportRecords.add(new ReportRecordEntity(line.split(";")));
+                    String [] reportRecordEntityArgs = sc.nextLine().split(";");
+                    reportRecords.add(new ReportRecordEntity(Integer.parseInt(reportRecordEntityArgs[0]),
+                                                            LocalDate.parse(reportRecordEntityArgs[1]),
+                                                            Double.parseDouble(reportRecordEntityArgs[2]),
+                                                            reportRecordEntityArgs[3]));
                 } catch (RuntimeException e){
                     System.out.println(e.getMessage());
                 }

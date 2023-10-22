@@ -1,4 +1,4 @@
-package org.example.entities;
+package enums;
 
 public enum CurrencyType {
     USD, EUR, TRY

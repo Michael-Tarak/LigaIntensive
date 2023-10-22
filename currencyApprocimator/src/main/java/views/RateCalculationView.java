@@ -1,6 +1,5 @@
-package org.example.entities;
+package views;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class RateCalculationView {
@@ -10,6 +9,14 @@ public class RateCalculationView {
     public RateCalculationView(LocalDate date, double rate) {
         this.date = date;
         this.rate = rate;
+        setDayOfWeek(date);
+    }
+
+    public String getRateCalculationLine() {
+        return dayOfWeek + " " + date.toString() + " - " + rate;
+    }
+
+    private void setDayOfWeek(LocalDate date) {
         switch (date.getDayOfWeek()) {
 
             case MONDAY -> {
@@ -34,10 +41,6 @@ public class RateCalculationView {
                 dayOfWeek = "Вс";
             }
         }
-    }
-
-    public String getRateCalculationLine() {
-        return dayOfWeek + " " + date.toString() + " - " + rate;
     }
 
 }
