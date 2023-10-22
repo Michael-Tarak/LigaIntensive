@@ -1,5 +1,7 @@
 package enums;
 
 public enum CurrencyType {
-    USD, EUR, TRY
+    USD,
+    EUR,
+    TRY
 }

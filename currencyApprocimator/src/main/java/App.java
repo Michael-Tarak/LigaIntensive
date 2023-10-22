@@ -1,4 +1,5 @@
 
+import services.CommandReaderService;
 import services.CurrencyAnalyzerService;
 
 import java.util.Scanner;
@@ -13,18 +14,7 @@ public class App
         String commandText;
         Scanner sc = new Scanner(System.in);
         commandText = sc.nextLine();
-        String[] command = commandText.split("\\s+");
-        CurrencyAnalyzerService cas = new CurrencyAnalyzerService();
-        switch (command[0]) {
-            case "rate": {
-                cas.rateCurrency(command[1], command[2]);
-            }
-            default:
-                System.out.println("Unknown command");
-        }
-
-
-
+        CommandReaderService crs = new CommandReaderService(commandText);
 
     }
 }

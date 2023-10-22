@@ -19,8 +19,7 @@ public class WeekRateService implements RateService {
         for (int i = 0; i < DAYS_WEEK; i++) {
             List<ReportRecordEntity> analysisForDay = report.subList(i, DAYS_WEEK + i);
 
-
-            rateCalculations.add(new RateCalculation(report.get(0).getDate().plusDays(1),
+            rateCalculations.add(new RateCalculation(report.get(i).getDate().plusDays(1),
                     new CalculateFutureCurrencyService().calculateAverageFromWeek(analysisForDay)));
         }
         return rateCalculations;
