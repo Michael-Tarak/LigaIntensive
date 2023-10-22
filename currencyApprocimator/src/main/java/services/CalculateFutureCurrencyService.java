@@ -3,6 +3,7 @@ package services;
 import entities.ReportRecordEntity;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 public class CalculateFutureCurrencyService {
@@ -11,8 +12,8 @@ public class CalculateFutureCurrencyService {
 
         BigDecimal rateSum = new BigDecimal(0);
         for (ReportRecordEntity record : weekReportRecords) {
-            rateSum.add(record.getRate());
+            rateSum = rateSum.add(record.getRate());
         }
-        return rateSum.divide(BigDecimal.valueOf(DAYS_WEEK));
+        return rateSum.divide(BigDecimal.valueOf(DAYS_WEEK), MathContext.DECIMAL32);
     }
 }
