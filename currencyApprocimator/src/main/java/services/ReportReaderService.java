@@ -14,13 +14,13 @@ public class ReportReaderService {
         String reportPath;
         switch (currencyType) {
             case USD -> {
-                reportPath = "currencyApprocimator\\reports\\usd.csv";
+                reportPath = "currencyApprocimator\\src\\main\\resources\\reports\\usd.csv";
             }
             case EUR -> {
-                reportPath = "currencyApprocimator\\reports\\euro.csv";
+                reportPath = "currencyApprocimator\\src\\main\\resources\\reports\\euro.csv";
             }
             case TRY -> {
-                reportPath = "currencyApprocimator\\reports\\lira.csv";
+                reportPath = "currencyApprocimator\\src\\main\\resources\\reports\\lira.csv";
             }
             default -> {
                 throw new IllegalArgumentException();
@@ -36,20 +36,6 @@ public class ReportReaderService {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-//        File file = new File(reportPath);
-//        fileData = new ArrayList<>();
-//        try (Scanner sc = new Scanner(file)) {
-//            while (sc.hasNextLine()) {
-//                try {
-//                    fileData.add(sc.nextLine());
-//                } catch (RuntimeException e){
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println(e.getMessage());
-//        }
     }
 
     public List<String> getFileData() { return fileData; }

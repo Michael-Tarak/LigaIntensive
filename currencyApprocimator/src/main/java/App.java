@@ -14,7 +14,7 @@ public class App
         String commandText;
         Scanner sc = new Scanner(System.in);
         commandText = sc.nextLine();
-        CommandReaderService crs = new CommandReaderService(commandText);
+        new CommandReaderService().readCommandFromConsole(commandText);
 
     }
 }
