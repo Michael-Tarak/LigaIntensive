@@ -1,7 +1,7 @@
 package services;
 
 import entities.Report;
-import entities.ReportRecordEntity;
+import entities.ReportRecord;
 import enums.CurrencyType;
 import models.RateCalculation;
 
@@ -15,9 +15,9 @@ public class TomorrowRateService implements RateService {
     @Override
     public List<RateCalculation> getCurrencyStatistic(CurrencyType currencyType) {
         Report reportEntity = new Report(currencyType);
-        List<ReportRecordEntity> report = reportEntity.getReportRecords();
-        report.sort(Comparator.comparing(ReportRecordEntity::getDate, Comparator.reverseOrder()));
-        List<ReportRecordEntity> analysisForDay = report.subList(0, DAYS_WEEK);
+        List<ReportRecord> report = reportEntity.getReportRecords();
+        report.sort(Comparator.comparing(ReportRecord::getDate, Comparator.reverseOrder()));
+        List<ReportRecord> analysisForDay = report.subList(0, DAYS_WEEK);
         List<RateCalculation> rateCalculations = new ArrayList();
 
         rateCalculations.add(new RateCalculation(report.get(0).getDate().plusDays(1),

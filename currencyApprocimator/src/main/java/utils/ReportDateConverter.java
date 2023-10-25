@@ -6,8 +6,7 @@ import java.time.format.DateTimeFormatterBuilder;
 
 public class ReportDateConverter {
     public static LocalDate convertFromCsvStyleToLocalDate(String date) {
-        String dateForConversion = date.replaceAll("\\.", "-");
-        DateTimeFormatter fmt = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy").toFormatter();
-        return LocalDate.parse(dateForConversion, fmt);
+        DateTimeFormatter fmt = new DateTimeFormatterBuilder().appendPattern("dd.MM.yyyy").toFormatter();
+        return LocalDate.parse(date, fmt);
     }
 }

@@ -3,8 +3,6 @@ package services;
 import enums.CurrencyType;
 import enums.RatePeriod;
 
-import java.util.Arrays;
-
 public class CommandReaderService {
     private final int ARGUMENTS_FOR_RATE_COMMAND_COUNT = 3;
 
@@ -17,13 +15,13 @@ public class CommandReaderService {
         switch (command[0]) {
             case "rate" -> {
                 try {
-                    if (command.length > ARGUMENTS_FOR_RATE_COMMAND_COUNT) {
+                    if (command.length != ARGUMENTS_FOR_RATE_COMMAND_COUNT) {
                         throw new IllegalArgumentException("Extra arguments for \"rate\" command");
                     }
 
-                    validateRateArguments(command[1], command[2]);
-
-                    new CurrencyAnalyzerService().predictFutureRateOfCurrency(command[1], command[2]);
+                    if (isValidRateArguments(command[1], command[2])) {
+                        new CurrencyAnalyzerService().predictFutureRateOfCurrency(command[1], command[2]);
+                    }
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
@@ -33,30 +31,21 @@ public class CommandReaderService {
         }
     }
 
-    private void validateRateArguments(String currency, String period) {
-        String [] currencyTypes = Arrays.toString(CurrencyType.values()).replaceAll("^.|.$", "").
-                replaceAll(" ", "").split(",");
-        boolean isValidCurrencyType = false;
-        for (String ct : currencyTypes) {
-            if (ct.equals(currency.toUpperCase())) {
-                isValidCurrencyType = true;
-                break;
-            }
+    private boolean isValidRateArguments(String currency, String period) {
+
+        try {
+            CurrencyType.valueOf(currency.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid currency type!");
+            return false;
         }
-        if (!isValidCurrencyType) {
-            throw new IllegalArgumentException("Invalid currency type!");
+
+        try {
+            RatePeriod.valueOf(period.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rate period!");
+            return false;
         }
-        String [] ratePeriods = Arrays.toString(RatePeriod.values()).replaceAll("^.|.$", "").
-                replaceAll(" ", "").split(",");
-        boolean isValidRatePeriod = false;
-        for (String rp : ratePeriods) {
-            if (rp.equals(period.toUpperCase())) {
-                isValidRatePeriod = true;
-                break;
-            }
-        }
-        if (!isValidRatePeriod) {
-            throw new IllegalArgumentException("Invalid rate period!");
-        }
-    };
+        return true;
+    }
 }

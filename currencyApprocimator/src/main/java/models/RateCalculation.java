@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class RateCalculation {
     LocalDate date;
     BigDecimal rate;
+
     public RateCalculation(LocalDate date, BigDecimal rate) {
         this.date = date;
         this.rate = new BigDecimal(rate.doubleValue());

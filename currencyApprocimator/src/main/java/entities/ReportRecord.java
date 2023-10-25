@@ -3,20 +3,20 @@ package entities;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class ReportRecordEntity {
+public class ReportRecord {
     private final int nominal;
     private final LocalDate date;
     private final BigDecimal rate;
     private final String currency;
 
-    ReportRecordEntity (int nominal, LocalDate date, double rate, String currency) {
+    ReportRecord (int nominal, LocalDate date, double rate, String currency) {
         this.nominal = nominal;
         this.date = date;
         this.rate = BigDecimal.valueOf(rate);
         this.currency = currency;
     }
 
-    public int getNominal() {
+    public int getNominal () {
         return nominal;
     }
 
@@ -24,11 +24,11 @@ public class ReportRecordEntity {
         return date;
     }
 
-    public BigDecimal getRate() {
+    public BigDecimal getRate () {
         return rate;
     }
 
-    public String getCurrencyType() {
+    public String getCurrencyType () {
         return currency;
     }
 
